@@ -1,40 +1,43 @@
 import Image from 'next/image'
+import { HomeIcon as HomeIconFilled } from '@heroicons/react/solid'
 import {
   HeartIcon,
-  HomeIcon,
   MenuIcon,
   PaperAirplaneIcon,
   PlusCircleIcon,
   SearchIcon,
   UserGroupIcon,
 } from '@heroicons/react/outline'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { UserIcon } from '@heroicons/react/solid'
+
+import instagram_logo from '$public/instagram_logo.svg'
+import instagram_icon from '$public/instagram_icon.svg'
 
 export default function Header() {
+  const { data: session, status } = useSession()
+
+  console.log(status)
+
   return (
-    <div className="sticky top-0 z-50 border-b bg-white shadow-sm">
-      <div className="mx-5 flex max-w-6xl justify-between px-4 lg:mx-auto">
+    <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
+      <div className="mx-5 flex max-w-6xl items-center justify-between px-4 lg:mx-auto">
         {/* Left */}
-        <div className="relative hidden h-16 w-28 cursor-pointer lg:inline-grid">
+        <div className="hidden w-28 cursor-pointer lg:inline-grid">
           <Image
-            src="/instagram_logo.svg"
+            src={instagram_logo}
             alt="Instagram"
-            layout="fill"
             objectFit="contain"
             priority
           />
         </div>
-        <div className="relative w-10 flex-shrink-0 cursor-pointer lg:hidden">
-          <Image
-            src="/instagram_icon.svg"
-            alt="Instagram"
-            layout="fill"
-            objectFit="contain"
-          />
+        <div className="w-8 flex-shrink-0 cursor-pointer lg:hidden">
+          <Image src={instagram_icon} alt="Instagram" objectFit="contain" />
         </div>
 
         {/* Middle - search input field */}
         <div className="max-w-xs">
-          <div className="relative mt-1 rounded-md p-3">
+          <div className="relative rounded-md p-3">
             <div className="pointer-events-none absolute inset-y-0 flex items-center pl-3">
               <SearchIcon className="h-5 w-5 text-gray-500" />
             </div>
@@ -50,27 +53,45 @@ export default function Header() {
 
         {/* Right */}
         <div className="flex items-center justify-end space-x-4">
-          <HomeIcon className="nav-btn" />
+          <HomeIconFilled className="nav-btn" />
           <MenuIcon className="h-6 w-10 cursor-pointer md:hidden" />
-          <div className="nav-btn relative">
-            <PaperAirplaneIcon className="nav-btn rotate-45" />
-            <div className="absolute -top-1 -right-2 grid h-5 w-5 animate-pulse place-items-center  rounded-full bg-red-500 text-xs text-white">
-              3
-            </div>
-          </div>
-          <PlusCircleIcon className="nav-btn" />
-          <UserGroupIcon className="nav-btn" />
-          <HeartIcon className="nav-btn" />
-          <div className="relative h-9 w-9">
-            <Image
-              src="https://lh3.googleusercontent.com/WeDMcKIFnYZCtXvXaKkN0zlaGNmEIndsQwYY10z3kwG6eCs527TnkQUeZ8mIRZldVg4tS8RtGCavBUfRQH8jzEGWKb3uc0Euk2EWT6E"
-              alt="Profile picture"
-              layout="fill"
-              className="cursor-pointer rounded-full"
-            />
-          </div>
+
+          {session?.user ? (
+            <>
+              <div className="nav-btn relative">
+                <PaperAirplaneIcon className="nav-btn rotate-45" />
+                <div className="absolute -top-1 -right-2 grid h-5 w-5 animate-pulse place-items-center  rounded-full bg-red-500 text-xs text-white">
+                  3
+                </div>
+              </div>
+              <PlusCircleIcon className="nav-btn" />
+              <UserGroupIcon className="nav-btn" />
+              <HeartIcon className="nav-btn" />
+
+              {/* Profile picture */}
+              <div
+                onClick={() => signOut()}
+                className="relative aspect-square w-9 cursor-pointer"
+              >
+                {session?.user?.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt="Profile picture"
+                    layout="fill"
+                    className="rounded-full"
+                  />
+                ) : (
+                  <span className="block rounded-full bg-gray-200 p-[2px]">
+                    <UserIcon className="rounded-full text-white" />
+                  </span>
+                )}
+              </div>
+            </>
+          ) : (
+            <button onClick={() => signIn()}>Sign In</button>
+          )}
         </div>
       </div>
-    </div>
+    </header>
   )
 }

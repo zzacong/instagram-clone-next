@@ -1,6 +1,9 @@
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 
 export default function MiniProfile() {
+  const { data: session } = useSession()
+
   return (
     <div className="mt-12 ml-8 flex items-center justify-between">
       <div className="relative aspect-square w-14 rounded-full border p-[2px]">
