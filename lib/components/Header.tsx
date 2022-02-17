@@ -20,11 +20,12 @@ export default function Header() {
             alt="Instagram"
             layout="fill"
             objectFit="contain"
+            priority
           />
         </div>
         <div className="relative w-10 flex-shrink-0 cursor-pointer lg:hidden">
           <Image
-            src="/instagram_simple_icon.svg"
+            src="/instagram_icon.svg"
             alt="Instagram"
             layout="fill"
             objectFit="contain"
