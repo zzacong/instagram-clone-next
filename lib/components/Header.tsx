@@ -9,15 +9,13 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { UserIcon } from '@heroicons/react/solid'
 
+import Avatar from '$lib/components/Avatar'
 import instagram_logo from '$public/instagram_logo.svg'
 import instagram_icon from '$public/instagram_icon.svg'
 
 export default function Header() {
-  const { data: session, status } = useSession()
-
-  console.log(status)
+  const { data: session } = useSession()
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
@@ -81,9 +79,7 @@ export default function Header() {
                     className="rounded-full"
                   />
                 ) : (
-                  <span className="block rounded-full bg-gray-200 p-[2px]">
-                    <UserIcon className="rounded-full text-white" />
-                  </span>
+                  <Avatar />
                 )}
               </div>
             </>
