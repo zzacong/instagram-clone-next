@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { useRecoilState } from 'recoil'
 import { HomeIcon as HomeIconFilled } from '@heroicons/react/solid'
 import {
   HeartIcon,
@@ -14,9 +15,11 @@ import {
 import Avatar from '$lib/components/Avatar'
 import instagram_logo from '$public/instagram_logo.svg'
 import instagram_icon from '$public/instagram_icon.svg'
+import { modalState } from '$lib/stores'
 
 export default function Header() {
   const { data: session } = useSession()
+  const [modal, setModal] = useRecoilState(modalState)
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
@@ -71,7 +74,10 @@ export default function Header() {
                   3
                 </div>
               </div>
-              <PlusCircleIcon className="nav-btn" />
+              <PlusCircleIcon
+                onClick={() => setModal(true)}
+                className="nav-btn"
+              />
               <UserGroupIcon className="nav-btn" />
               <HeartIcon className="nav-btn" />
 

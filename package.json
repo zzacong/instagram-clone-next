@@ -14,13 +14,15 @@
     "ci-check": "run-p lint typecheck"
   },
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "clsx": "^1.1.1",
     "firebase": "^9.6.6",
     "next": "12.0.10",
     "next-auth": "^4.2.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "recoil": "^0.6.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^6.0.0-alpha.6",

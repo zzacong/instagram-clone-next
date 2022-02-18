@@ -24,12 +24,12 @@ export default function SignIn({ providers }: PageProps) {
           This is not a real app, it is built for hobby purpose.
         </p>
 
-        <div className="mt-36">
+        <div className="mt-32">
           {Object.values(providers).map(provider => (
             <div key={provider.name}>
               <button
                 onClick={() => signIn(provider.id, { callbackUrl: '/' })}
-                className="rounded-lg bg-blue-500 px-8 py-2 text-white"
+                className="rounded-lg bg-blue-500 px-8 py-2 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 Sign in with {provider.name}
               </button>
