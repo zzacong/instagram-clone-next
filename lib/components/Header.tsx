@@ -23,7 +23,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
-      <div className="mx-5 flex max-w-6xl items-center justify-between px-4 lg:mx-auto">
+      <div className="flex max-w-6xl items-center justify-between px-4 lg:mx-auto">
         {/* Left */}
         <Link href="/" passHref>
           <a className="hidden w-28 cursor-pointer lg:inline-grid">

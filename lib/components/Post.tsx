@@ -1,6 +1,6 @@
-import type { Post, Comment } from '$lib/types'
+import type { Post, Comment, Like } from '$lib/types'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { format, formatDistanceToNow } from 'date-fns'
@@ -19,18 +19,27 @@ import { useForm } from 'react-hook-form'
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
 } from 'firebase/firestore'
 import { db } from '$lib/config/firebase'
+import { Transition } from '@headlessui/react'
 
 export default function Post({ post: p }: { post: Post }) {
   const { data: session } = useSession()
   const { handleSubmit, register, watch, formState, reset } = useForm()
-  const { isSubmitting } = formState
+
   const [comments, setComments] = useState<Comment[]>([])
+  const [likes, setLikes] = useState<Like[]>([])
+  const [hasLiked, setHasLiked] = useState(false)
+  const [isShowing, setIsShowing] = useState(false)
+
+  const { isSubmitting } = formState
 
   const onComment = handleSubmit(async data => {
     if (!session?.user) return
@@ -42,6 +51,23 @@ export default function Post({ post: p }: { post: Post }) {
     })
     reset()
   })
+
+  const onLikePost = useCallback(() => {
+    if (!session?.user?.uid) return
+    const userId = session.user.uid
+    const docRef = doc(db, 'posts', p.id, 'likes', userId)
+    if (hasLiked) {
+      return deleteDoc(docRef)
+    }
+    return setDoc(docRef, {
+      username: session.user.username,
+    })
+  }, [hasLiked, p.id, session?.user?.uid, session?.user?.username])
+
+  const onAnimate = () => {
+    setIsShowing(true)
+    setTimeout(() => setIsShowing(false), 1000)
+  }
 
   useEffect(
     () =>
@@ -56,6 +82,19 @@ export default function Post({ post: p }: { post: Post }) {
           )
       ),
     [p.id]
+  )
+
+  useEffect(
+    () =>
+      onSnapshot(collection(db, 'posts', p.id, 'likes'), snapshot =>
+        setLikes(snapshot.docs.map(d => ({ id: d.id, ...d.data() } as Like)))
+      ),
+    [p.id]
+  )
+
+  useEffect(
+    () => setHasLiked(likes.some(l => l.id === session?.user?.uid)),
+    [likes, session?.user?.uid]
   )
 
   return (
@@ -77,14 +116,34 @@ export default function Post({ post: p }: { post: Post }) {
 
       {/* Image */}
       {p.image ? (
-        <Image
-          src={p.image}
-          alt={p.caption}
-          width="100%"
-          height="100%"
-          layout="responsive"
-          objectFit="cover"
-        />
+        <div
+          className="relative"
+          onDoubleClick={() => {
+            onAnimate()
+            !hasLiked && onLikePost()
+          }}
+        >
+          <Image
+            src={p.image}
+            alt={p.caption}
+            width="100%"
+            height="100%"
+            layout="responsive"
+            objectFit="cover"
+          />
+          <Transition
+            show={isShowing}
+            enter="transition-transform duration-80 ease-out"
+            enterFrom="scale-0"
+            enterTo="scale-90"
+            leave="transition-transform duration-80 ease-in"
+            leaveFrom="scale-100"
+            leaveTo="scale-0"
+            className="absolute inset-0 grid place-items-center"
+          >
+            <HeartIconFilled className="h-44 w-44 animate-likeheart text-white" />
+          </Transition>
+        </div>
       ) : (
         <div className="grid h-48 place-items-center bg-gray-50 py-4">
           <div className="h-12 w-12">
@@ -97,7 +156,13 @@ export default function Post({ post: p }: { post: Post }) {
       {session && (
         <div className="flex justify-between px-4 pt-4">
           <div className="flex space-x-4">
-            <HeartIcon className="btn" />
+            <span onClick={onLikePost} className="btn block">
+              {hasLiked ? (
+                <HeartIconFilled className="text-red-500" />
+              ) : (
+                <HeartIcon />
+              )}
+            </span>
             <ChatIcon className="btn" />
             <PaperAirplaneIcon className="btn" />
           </div>
@@ -107,12 +172,15 @@ export default function Post({ post: p }: { post: Post }) {
 
       {/* Caption */}
       <p className="truncate p-4">
+        {likes.length > 0 && (
+          <p className="mb-1 font-semibold">{likes.length} likes</p>
+        )}
         <span className="mr-2 font-bold">{p.username}</span>
         {p.caption}
       </p>
 
       {/* Comments */}
-      {comments.length && (
+      {comments.length > 0 && (
         <div className="h-20 overflow-y-scroll p-4 scrollbar-thin scrollbar-thumb-black">
           {comments.map(c => (
             <div key={c.id} className="flex items-center space-x-2 pb-4">

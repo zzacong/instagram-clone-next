@@ -8,6 +8,6 @@
   }
 
   .btn {
-    @apply h-7 cursor-pointer transition-all duration-150 ease-out hover:scale-125;
+    @apply h-7 w-7 cursor-pointer transition-all duration-150 ease-out hover:scale-125;
   }
 }

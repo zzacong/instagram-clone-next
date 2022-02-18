@@ -32,6 +32,11 @@ export type Comment = {
   timestamp: Timestamp
 }
 
+export type Like = {
+  id: string
+  username: string
+}
+
 declare module 'next-auth' {
   export interface Session {
     user?: DefaultSession['user'] & {
