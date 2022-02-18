@@ -1,5 +1,6 @@
 import type { ContextualCard } from '@faker-js/faker/helpers'
 import type { DefaultSession } from 'next-auth'
+import type { Timestamp } from 'firebase/firestore'
 
 export type Profile = {
   id: string
@@ -20,6 +21,15 @@ export type Post = {
   profileImage: string
   image: string
   caption: string
+  timestamp: Timestamp
+}
+
+export type Comment = {
+  id: string
+  username: string
+  comment: string
+  profileImage: string
+  timestamp: Timestamp
 }
 
 declare module 'next-auth' {
