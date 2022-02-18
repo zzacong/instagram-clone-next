@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import Link from 'next/link'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import { HomeIcon as HomeIconFilled } from '@heroicons/react/solid'
 import {
   HeartIcon,
@@ -8,7 +10,6 @@ import {
   SearchIcon,
   UserGroupIcon,
 } from '@heroicons/react/outline'
-import { signIn, signOut, useSession } from 'next-auth/react'
 
 import Avatar from '$lib/components/Avatar'
 import instagram_logo from '$public/instagram_logo.svg'
@@ -21,17 +22,21 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
       <div className="mx-5 flex max-w-6xl items-center justify-between px-4 lg:mx-auto">
         {/* Left */}
-        <div className="hidden w-28 cursor-pointer lg:inline-grid">
-          <Image
-            src={instagram_logo}
-            alt="Instagram"
-            objectFit="contain"
-            priority
-          />
-        </div>
-        <div className="w-8 flex-shrink-0 cursor-pointer lg:hidden">
-          <Image src={instagram_icon} alt="Instagram" objectFit="contain" />
-        </div>
+        <Link href="/" passHref>
+          <a className="hidden w-28 cursor-pointer lg:inline-grid">
+            <Image
+              src={instagram_logo}
+              alt="Instagram"
+              objectFit="contain"
+              priority
+            />
+          </a>
+        </Link>
+        <Link href="/" passHref>
+          <a className="w-8 flex-shrink-0 cursor-pointer lg:hidden">
+            <Image src={instagram_icon} alt="Instagram" objectFit="contain" />
+          </a>
+        </Link>
 
         {/* Middle - search input field */}
         <div className="max-w-xs">
@@ -51,7 +56,11 @@ export default function Header() {
 
         {/* Right */}
         <div className="flex items-center justify-end space-x-4">
-          <HomeIconFilled className="nav-btn" />
+          <Link href="/" passHref>
+            <a className="nav-btn">
+              <HomeIconFilled />
+            </a>
+          </Link>
           <MenuIcon className="h-6 w-10 cursor-pointer md:hidden" />
 
           {session?.user ? (

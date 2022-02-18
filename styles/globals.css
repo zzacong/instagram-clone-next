@@ -4,7 +4,7 @@
 
 @layer components {
   .nav-btn {
-    @apply hidden h-6 cursor-pointer transition-all duration-150 ease-out hover:scale-125 md:inline-flex;
+    @apply hidden h-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105 md:inline-flex;
   }
 
   .btn {
