@@ -6,6 +6,7 @@ const nextConfig = {
       'lh3.googleusercontent.com',
       'cloudflare-ipfs.com',
       'images.unsplash.com',
+      'firebasestorage.googleapis.com',
     ],
   },
 }

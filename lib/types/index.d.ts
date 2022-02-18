@@ -13,10 +13,11 @@ export type Profile = {
     bs: string
   }
 }
+
 export type Post = {
   id: string
   username: string
-  userImage: string
+  profileImage: string
   image: string
   caption: string
 }
