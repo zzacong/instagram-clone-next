@@ -19,7 +19,7 @@ export default function Stories() {
   }, [])
 
   return (
-    <ul className="mt-8 flex space-x-2 overflow-x-scroll rounded-sm border border-gray-200 bg-white p-6 scrollbar-thin scrollbar-thumb-black">
+    <ul className="mt-8 flex space-x-4 overflow-x-scroll rounded-sm border border-gray-200 bg-white p-4 scrollbar-thin scrollbar-thumb-black">
       {session?.user && (
         <Story
           profile={{

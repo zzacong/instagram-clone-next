@@ -111,7 +111,9 @@ export default function Post({ post: p }: { post: Post }) {
           />
         </div>
         <p className="flex-1 font-bold">{p.username}</p>
-        <DotsHorizontalIcon className="h-5" />
+        <button className="focusable">
+          <DotsHorizontalIcon className="h-5" />
+        </button>
       </header>
 
       {/* Image */}
@@ -156,17 +158,24 @@ export default function Post({ post: p }: { post: Post }) {
       {session && (
         <div className="flex justify-between px-4 pt-4">
           <div className="flex space-x-4">
-            <span onClick={onLikePost} className="btn block">
+            <button onClick={onLikePost} className="btn focusable">
               {hasLiked ? (
                 <HeartIconFilled className="text-red-500" />
               ) : (
                 <HeartIcon />
               )}
-            </span>
-            <ChatIcon className="btn" />
-            <PaperAirplaneIcon className="btn" />
+            </button>
+            <button className="btn focusable">
+              <ChatIcon />
+            </button>
+            <button className="btn focusable">
+              <PaperAirplaneIcon />
+            </button>
           </div>
-          <BookmarkIcon className="btn" />
+
+          <button className="btn focusable">
+            <BookmarkIcon className="btn" />
+          </button>
         </div>
       )}
 
@@ -208,7 +217,9 @@ export default function Post({ post: p }: { post: Post }) {
       {/* Input box */}
       {session && (
         <form onSubmit={onComment} className="flex items-center border-t p-4">
-          <EmojiHappyIcon className="h-7" />
+          <button className="focusable mr-2">
+            <EmojiHappyIcon className="h-7" />
+          </button>
           <input
             type="text"
             id="comment"
@@ -219,7 +230,7 @@ export default function Post({ post: p }: { post: Post }) {
           <button
             type="submit"
             disabled={!watch('comment')?.trim() || isSubmitting}
-            className="rounded px-4 font-semibold text-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:text-blue-300"
+            className="focusable rounded px-4 font-semibold text-blue-500 disabled:text-blue-300"
           >
             Post
           </button>

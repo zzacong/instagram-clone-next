@@ -4,7 +4,7 @@
 
 @layer components {
   .nav-btn {
-    @apply hidden h-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105 md:inline-flex;
+    @apply hidden h-6 w-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105 md:inline-flex;
   }
 
   .btn {
@@ -12,6 +12,6 @@
   }
 
   .focusable {
-    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply cursor-pointer rounded focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
   }
 }

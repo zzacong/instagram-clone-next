@@ -19,7 +19,9 @@ export default function Suggestions() {
     <div className="mt-4 ml-8">
       <div className="mb-5 flex justify-between text-sm">
         <h3 className="font-bold text-gray-400">Suggestions for you</h3>
-        <button className="font-semibold text-gray-600">See all</button>
+        <button className="focusable font-semibold text-gray-600">
+          See all
+        </button>
       </div>
 
       <ul>
@@ -34,13 +36,19 @@ export default function Suggestions() {
               />
             </div>
             <div className="flex-1 px-4">
-              <h2 className="text-sm font-semibold">{p.username}</h2>
+              <h2 className="text-sm font-semibold">
+                <a href="#" className="focusable">
+                  {p.username}
+                </a>
+              </h2>
               <h3 className="text-xs text-gray-400">
                 Works at {p.company?.name}
               </h3>
             </div>
 
-            <button className="text-xs text-blue-400">Follow</button>
+            <button className="focusable text-xs font-semibold text-blue-500">
+              Follow
+            </button>
           </li>
         ))}
       </ul>

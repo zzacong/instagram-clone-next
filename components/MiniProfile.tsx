@@ -22,13 +22,17 @@ export default function MiniProfile() {
       </div>
 
       <div className="flex-1 px-4">
-        <h2 className="font-bold">{session?.user?.username}</h2>
+        <h2 className="font-bold">
+          <a href="#" className="focusable">
+            {session?.user?.username}
+          </a>
+        </h2>
         <h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
       </div>
 
       <button
         onClick={() => signOut()}
-        className="text-sm font-semibold text-blue-400"
+        className="focusable text-sm font-semibold text-blue-500"
       >
         Sign Out
       </button>

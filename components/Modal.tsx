@@ -120,9 +120,9 @@ export default function Modal() {
                     />
                   </div>
                 ) : (
-                  <div className="mx-auto grid aspect-square w-12 cursor-pointer place-items-center rounded-full bg-red-100">
+                  <div className="mx-auto grid aspect-square w-12 cursor-pointer place-items-center rounded-full bg-blue-100">
                     <CameraIcon
-                      className="aspect-square w-6 text-red-600"
+                      className="aspect-square w-6 text-blue-600"
                       aria-hidden="true"
                       onClick={() => filePickerRef.current?.click()}
                     />
@@ -148,12 +148,12 @@ export default function Modal() {
                     />
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-4">
                     <input
                       ref={captionRef}
                       type="text"
                       placeholder="Please enter your caption..."
-                      className="w-full border-none text-center focus:ring-0"
+                      className="w-full rounded border-none text-center focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export default function Modal() {
                   <button
                     onClick={onUpload}
                     disabled={isLoading || !file}
-                    className="w-full rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 hover:disabled:bg-gray-300 sm:text-sm"
+                    className="w-full rounded-md bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 hover:disabled:bg-gray-300 sm:text-sm"
                   >
                     {isLoading ? 'Uploading...' : 'Upload Post'}
                   </button>
