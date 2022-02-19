@@ -3,19 +3,8 @@ import type { Post, Comment, Like } from '$lib/types'
 import { useCallback, useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
-import { format, formatDistanceToNow } from 'date-fns'
-import {
-  BookmarkIcon,
-  ChatIcon,
-  DotsHorizontalIcon,
-  EmojiHappyIcon,
-  HeartIcon,
-  PaperAirplaneIcon,
-} from '@heroicons/react/outline'
-import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid'
-
-import Spinner from '$lib/components/Spinner'
 import { useForm } from 'react-hook-form'
+import { formatDistanceToNow } from 'date-fns'
 import {
   addDoc,
   collection,
@@ -27,8 +16,19 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore'
-import { db } from '$lib/config/firebase'
+import {
+  BookmarkIcon,
+  ChatIcon,
+  DotsHorizontalIcon,
+  EmojiHappyIcon,
+  HeartIcon,
+  PaperAirplaneIcon,
+} from '@heroicons/react/outline'
+import { HeartIcon as HeartIconFilled } from '@heroicons/react/solid'
 import { Transition } from '@headlessui/react'
+
+import Spinner from '$components/Spinner'
+import { db } from '$lib/config/firebase'
 
 export default function Post({ post: p }: { post: Post }) {
   const { data: session } = useSession()

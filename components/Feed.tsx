@@ -1,10 +1,10 @@
 import { useSession } from 'next-auth/react'
 import clsx from 'clsx'
 
-import Stories from '$lib/components/Stories'
-import Posts from '$lib/components/Posts'
-import MiniProfile from '$lib/components/MiniProfile'
-import Suggestions from '$lib/components/Suggestions'
+import Stories from '$components/Stories'
+import Posts from '$components/Posts'
+import MiniProfile from '$components/MiniProfile'
+import Suggestions from '$components/Suggestions'
 
 export default function Feed() {
   const { data: session } = useSession()

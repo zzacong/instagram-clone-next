@@ -16,10 +16,14 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
+      "$components": ["components"],
+      "$components/*": ["components/*"],
       "$lib": ["lib"],
       "$lib/*": ["lib/*"],
       "$public": ["public"],
-      "$public/*": ["public/*"]
+      "$public/*": ["public/*"],
+      "$styles": ["styles"],
+      "$styles/*": ["styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

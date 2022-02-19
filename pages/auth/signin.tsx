@@ -2,7 +2,7 @@ import type { GetServerSideProps } from 'next'
 import Image from 'next/image'
 import { getProviders, signIn } from 'next-auth/react'
 
-import Header from '$lib/components/Header'
+import Header from '$components/Header'
 import instagram_logo from '$public/instagram_logo.svg'
 
 export default function SignIn({ providers }: PageProps) {

@@ -12,7 +12,7 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/outline'
 
-import Avatar from '$lib/components/Avatar'
+import Avatar from '$components/Avatar'
 import instagram_logo from '$public/instagram_logo.svg'
 import instagram_icon from '$public/instagram_icon.svg'
 import { modalState } from '$lib/stores'
@@ -70,7 +70,7 @@ export default function Header() {
             <>
               <div className="nav-btn relative">
                 <PaperAirplaneIcon className="nav-btn rotate-45" />
-                <div className="absolute -top-1 -right-2 grid h-5 w-5 animate-pulse place-items-center  rounded-full bg-red-500 text-xs text-white">
+                <div className="absolute -top-1 -right-2 grid h-5 w-5 animate-pulse place-items-center rounded-full bg-red-500 text-xs text-white">
                   3
                 </div>
               </div>

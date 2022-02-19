@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
 import type { Post as PostType } from '$lib/types'
-import Post from '$lib/components/Post'
+import Post from '$components/Post'
 import { db } from '$lib/config/firebase'
 
 export default function Posts() {

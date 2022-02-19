@@ -15,12 +15,12 @@ import {
   serverTimestamp,
   updateDoc,
 } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadString } from 'firebase/storage'
 import { Dialog, Transition } from '@headlessui/react'
 import { CameraIcon } from '@heroicons/react/outline'
 
 import { modalState } from '$lib/stores'
 import { db, storage } from '$lib/config/firebase'
-import { getDownloadURL, ref, uploadString } from 'firebase/storage'
 
 export default function Modal() {
   const { data: session } = useSession()
@@ -36,7 +36,6 @@ export default function Modal() {
     if (isLoading || !file || !ext || !session?.user) return
     try {
       setIsLoading(true)
-      console.log('start')
       // create a post and add to firestore and get the post id
       const docRef = await addDoc(collection(db, 'posts'), {
         username: session.user?.username,
@@ -44,11 +43,9 @@ export default function Modal() {
         profileImage: session.user?.image,
         timestamp: serverTimestamp(),
       })
-      console.log('-->', docRef)
       // upload the image to firebase storage with the post id
       const imageRef = ref(storage, `posts/${docRef.id}.${ext}`)
       const res = await uploadString(imageRef, file, 'data_url')
-      console.log('res -->', res)
       // get download url of image and update the post document
       const downloadUrl = await getDownloadURL(imageRef)
       await updateDoc(docRef, {
@@ -165,7 +162,7 @@ export default function Modal() {
                   <button
                     onClick={onUpload}
                     disabled={isLoading || !file}
-                    className="w-full rounded-md  bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 hover:disabled:bg-gray-300 sm:text-sm"
+                    className="w-full rounded-md bg-blue-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300 hover:disabled:bg-gray-300 sm:text-sm"
                   >
                     {isLoading ? 'Uploading...' : 'Upload Post'}
                   </button>

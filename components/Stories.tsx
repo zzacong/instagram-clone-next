@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { faker } from '@faker-js/faker'
 
-import Story from '$lib/components/Story'
+import Story from '$components/Story'
 
 export default function Stories() {
   const { data: session } = useSession()

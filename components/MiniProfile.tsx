@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { signOut, useSession } from 'next-auth/react'
 
-import Avatar from '$lib/components/Avatar'
+import Avatar from '$components/Avatar'
 
 export default function MiniProfile() {
   const { data: session } = useSession()
