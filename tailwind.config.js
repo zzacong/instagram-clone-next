@@ -10,7 +10,7 @@ module.exports = {
         likeheart: {
           '0%': { opacity: 0, transform: 'scale(0)' },
           '15%': { opacity: 0.9, transform: 'scale(1.2)' },
-          '30%:': { transform: 'scale(0.95)' },
+          '30%': { transform: 'scale(0.95)' },
           '45%, 80%': { opacity: 0.9, transform: 'scale(1)' },
         },
       },
