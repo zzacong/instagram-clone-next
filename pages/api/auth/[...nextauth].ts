@@ -22,16 +22,14 @@ export default NextAuth({
 
   callbacks: {
     async session({ session, token, user }) {
-      console.log('session -->', session)
+      // console.log('session -->', session)
       // console.log('token -->', token)
       // console.log('user -->', user)
       if (session?.user) {
         session.user = {
           ...session.user,
           uid: token.sub,
-          username: session?.user?.name
-            ?.replaceAll(' ', '')
-            .toLocaleLowerCase(),
+          username: session?.user?.name?.replace(/\s/g, '').toLocaleLowerCase(),
         }
       }
       return session
