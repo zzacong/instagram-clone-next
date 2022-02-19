@@ -82,17 +82,19 @@ export default function Header() {
               <HeartIcon className="nav-btn" />
 
               {/* Profile picture */}
-              <div
-                onClick={() => signOut()}
-                className="relative aspect-square w-9 cursor-pointer"
-              >
+              <div className="relative  cursor-pointer">
                 {session?.user?.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt="Profile picture"
-                    layout="fill"
-                    className="rounded-full"
-                  />
+                  <button
+                    onClick={() => signOut()}
+                    className="focusable relative aspect-square w-9 rounded-full"
+                  >
+                    <Image
+                      src={session.user.image}
+                      alt="Profile picture"
+                      layout="fill"
+                      className="rounded-full"
+                    />
+                  </button>
                 ) : (
                   <Avatar />
                 )}
