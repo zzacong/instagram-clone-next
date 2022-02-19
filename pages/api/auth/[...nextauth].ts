@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
+import GithubProvider from 'next-auth/providers/github'
 
 export default NextAuth({
   providers: [
@@ -7,13 +8,11 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    }),
   ],
-
-  // theme: {
-  //   logo: '/instagram_logo.svg',
-  //   brandColor: '#f13287',
-  //   colorScheme: 'auto',
-  // },
 
   pages: {
     signIn: '/auth/signin',
@@ -22,9 +21,6 @@ export default NextAuth({
 
   callbacks: {
     async session({ session, token, user }) {
-      // console.log('session -->', session)
-      // console.log('token -->', token)
-      // console.log('user -->', user)
       if (session?.user) {
         session.user = {
           ...session.user,

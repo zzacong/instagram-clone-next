@@ -90,23 +90,23 @@ export default function Header() {
               </a>
 
               {/* Profile picture */}
-              <div className="relative  cursor-pointer">
-                {session?.user?.image ? (
-                  <button
-                    onClick={() => signOut()}
-                    className="focusable relative aspect-square w-9 rounded-full"
-                  >
-                    <Image
-                      src={session.user.image}
-                      alt="Profile picture"
-                      layout="fill"
-                      className="rounded-full"
-                    />
-                  </button>
-                ) : (
+              {session?.user?.image ? (
+                <button
+                  onClick={() => signOut()}
+                  className="focusable relative aspect-square w-9 rounded-full"
+                >
+                  <Image
+                    src={session.user.image}
+                    alt="Profile picture"
+                    layout="fill"
+                    className="rounded-full"
+                  />
+                </button>
+              ) : (
+                <div className="relative h-9 w-9 cursor-pointer">
                   <Avatar />
-                )}
-              </div>
+                </div>
+              )}
             </>
           ) : (
             <button

@@ -180,13 +180,15 @@ export default function Post({ post: p }: { post: Post }) {
       )}
 
       {/* Caption */}
-      <p className="truncate p-4">
+      <div className="p-4">
         {likes.length > 0 && (
           <p className="mb-1 font-semibold">{likes.length} likes</p>
         )}
-        <span className="mr-2 font-bold">{p.username}</span>
-        {p.caption}
-      </p>
+        <p className="truncate ">
+          <span className="mr-2 font-bold">{p.username}</span>
+          {p.caption}
+        </p>
+      </div>
 
       {/* Comments */}
       {comments.length > 0 && (

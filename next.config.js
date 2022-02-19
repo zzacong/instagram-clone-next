@@ -3,12 +3,14 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: [
-      // profile image
+      // google profile image
       'lh3.googleusercontent.com',
       // faker
       'cloudflare-ipfs.com',
       // firebase storage
       'firebasestorage.googleapis.com',
+      // github profile image
+      'avatars.githubusercontent.com',
     ],
   },
 }

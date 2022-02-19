@@ -4,7 +4,6 @@ import { getProviders, signIn } from 'next-auth/react'
 
 import Header from '$components/Header'
 import instagram_logo from '$public/instagram_logo.svg'
-import google_logo from '$public/google_logo.svg'
 
 export default function SignIn({ providers }: PageProps) {
   return (
@@ -25,29 +24,29 @@ export default function SignIn({ providers }: PageProps) {
           This is not a real app, it is built for hobby purpose.
         </p>
 
-        <div className="mt-24">
+        <ul className="mt-24 flex w-72 flex-col items-stretch space-y-4">
           {Object.values(providers).map(provider => (
-            <div key={provider.name}>
+            <li key={provider.name} className="w-full">
               {/* Google login button */}
               <button
                 onClick={() => signIn(provider.id, { callbackUrl: '/' })}
-                className="focusable relative rounded-lg border bg-white py-3 pl-4 pr-8 shadow hover:bg-gray-50"
+                className="focusable relative w-full rounded-lg border bg-white py-3 pl-4 pr-8 shadow hover:bg-gray-50"
               >
                 <div className="pointer-events-none absolute inset-y-0 grid place-items-center">
                   <Image
-                    src={google_logo}
-                    alt="Google logo"
+                    src={`/${provider.name}_logo.svg`}
+                    alt={`/${provider.name} logo`}
                     height={22}
                     width={22}
                   />
                 </div>
-                <span className="block w-full pl-14 text-sm">
-                  Sign in with {provider.name}
+                <span className="block w-full pl-14 text-sm text-gray-700">
+                  Continue with {provider.name}
                 </span>
               </button>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </>
   )
