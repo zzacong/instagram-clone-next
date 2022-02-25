@@ -4,7 +4,7 @@
 
 @layer components {
   .nav-btn {
-    @apply hidden h-6 w-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105 md:inline-flex;
+    @apply flex h-6 w-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105;
   }
 
   .btn {
@@ -13,5 +13,9 @@
 
   .focusable {
     @apply cursor-pointer rounded focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+  }
+
+  .modal-btn {
+    @apply h-12 cursor-pointer border-t border-gray-300 bg-white py-1 px-2 text-sm text-gray-800 hover:bg-gray-100 focus:border-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:text-opacity-60;
   }
 }

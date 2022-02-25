@@ -1,8 +1,9 @@
+import type { Post as PostType } from '$lib/types'
 import { useEffect, useState } from 'react'
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 
-import type { Post as PostType } from '$lib/types'
 import Post from '$components/Post'
+import EditPost from '$components/EditPost'
 import { db } from '$lib/config/firebase'
 
 export default function Posts() {
@@ -22,10 +23,13 @@ export default function Posts() {
   )
 
   return (
-    <div>
-      {posts.map(p => (
-        <Post key={p.id} post={p} />
-      ))}
-    </div>
+    <>
+      <div>
+        {posts.map(p => (
+          <Post key={p.id} post={p} />
+        ))}
+      </div>
+      <EditPost />
+    </>
   )
 }

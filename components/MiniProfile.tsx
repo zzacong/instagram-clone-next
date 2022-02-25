@@ -7,7 +7,7 @@ export default function MiniProfile() {
   const { data: session } = useSession()
 
   return (
-    <div className="mt-12 ml-8 flex items-center justify-between">
+    <div className="flex items-center justify-between pt-4">
       <div className="relative aspect-square w-14 rounded-full border p-[2px]">
         {session?.user?.image ? (
           <Image

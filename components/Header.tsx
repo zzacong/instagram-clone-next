@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { HomeIcon as HomeIconFilled } from '@heroicons/react/solid'
 import {
   HeartIcon,
-  MenuIcon,
   PaperAirplaneIcon,
   PlusCircleIcon,
   SearchIcon,
@@ -15,15 +14,15 @@ import {
 import Avatar from '$components/Avatar'
 import instagram_logo from '$public/instagram_logo.svg'
 import instagram_icon from '$public/instagram_icon.svg'
-import { modalState } from '$lib/stores'
+import { newPostModalState } from '$lib/stores'
 
 export default function Header() {
   const { data: session } = useSession()
-  const [modal, setModal] = useRecoilState(modalState)
+  const setIsOpen = useSetRecoilState(newPostModalState)
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
-      <div className="flex max-w-6xl items-center justify-between px-4 lg:mx-auto">
+    <header className="sticky top-0 z-10 border-b bg-white shadow-sm">
+      <nav className="flex h-16 max-w-5xl items-center justify-between px-2 lg:mx-auto">
         {/* Left */}
         <Link href="/" passHref>
           <a className="focusable hidden w-28 cursor-pointer lg:inline-flex">
@@ -42,42 +41,41 @@ export default function Header() {
         </Link>
 
         {/* Middle - search input field */}
-        <div className="max-w-xs">
-          <div className="relative rounded-md p-3">
-            <div className="pointer-events-none absolute inset-y-0 grid place-items-center pl-3">
-              <SearchIcon className="h-5 w-5 text-gray-500" />
-            </div>
-            <input
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search"
-              className="block w-full rounded-md border-gray-300 bg-gray-50 pl-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-            />
+        <div className="relative max-w-sm flex-grow rounded-md p-3">
+          <div className="pointer-events-none absolute inset-y-0 grid place-items-center pl-3">
+            <SearchIcon className="h-5 w-5 text-gray-500" />
           </div>
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search"
+            className="block w-full rounded-md border-gray-300 bg-gray-100 pl-10 focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          />
         </div>
 
         {/* Right */}
         <div className="flex items-center justify-end space-x-4">
           <Link href="/" passHref>
-            <a className="nav-btn focusable ">
+            <a className="nav-btn focusable">
               <HomeIconFilled />
             </a>
           </Link>
-          <button className="nav-btn focusable inline-flex md:hidden">
-            <MenuIcon />
-          </button>
 
           {session?.user ? (
             <>
-              <a href="#" className="nav-btn focusable relative">
+              <a
+                href="#"
+                className="nav-btn focusable relative"
+                aria-current="page"
+              >
                 <PaperAirplaneIcon className="rotate-45" />
                 <div className="absolute -top-1 -right-2 grid h-5 w-5 animate-pulse place-items-center rounded-full bg-red-500 text-xs text-white">
                   3
                 </div>
               </a>
               <button
-                onClick={() => setModal(true)}
+                onClick={() => setIsOpen(true)}
                 className="nav-btn focusable"
               >
                 <PlusCircleIcon />
@@ -117,7 +115,7 @@ export default function Header() {
             </button>
           )}
         </div>
-      </div>
+      </nav>
     </header>
   )
 }

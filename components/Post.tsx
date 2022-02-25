@@ -16,6 +16,7 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore'
+import { useSetRecoilState } from 'recoil'
 import {
   BookmarkIcon,
   ChatIcon,
@@ -29,10 +30,13 @@ import { Transition } from '@headlessui/react'
 
 import Spinner from '$components/Spinner'
 import { db } from '$lib/config/firebase'
+import { editPostModalState, editPostState } from '$lib/stores'
 
 export default function Post({ post: p }: { post: Post }) {
   const { data: session } = useSession()
   const { handleSubmit, register, watch, formState, reset } = useForm()
+  const setEditPost = useSetRecoilState(editPostState)
+  const setIsOpen = useSetRecoilState(editPostModalState)
 
   const [comments, setComments] = useState<Comment[]>([])
   const [likes, setLikes] = useState<Like[]>([])
@@ -111,7 +115,13 @@ export default function Post({ post: p }: { post: Post }) {
           />
         </div>
         <p className="flex-1 font-bold">{p.username}</p>
-        <button className="focusable">
+        <button
+          onClick={() => {
+            setEditPost(p)
+            setIsOpen(true)
+          }}
+          className="focusable"
+        >
           <DotsHorizontalIcon className="h-5" />
         </button>
       </header>

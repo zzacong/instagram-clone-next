@@ -16,7 +16,7 @@ export default function Suggestions() {
   }, [])
 
   return (
-    <div className="mt-4 ml-8">
+    <div className="mt-4">
       <div className="mb-5 flex justify-between text-sm">
         <h3 className="font-bold text-gray-400">Suggestions for you</h3>
         <button className="focusable font-semibold text-gray-600">
