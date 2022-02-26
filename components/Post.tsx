@@ -115,15 +115,17 @@ export default function Post({ post: p }: { post: Post }) {
           />
         </div>
         <p className="flex-1 font-bold">{p.username}</p>
-        <button
-          onClick={() => {
-            setEditPost(p)
-            setIsOpen(true)
-          }}
-          className="focusable"
-        >
-          <DotsHorizontalIcon className="h-5" />
-        </button>
+        {session && (
+          <button
+            onClick={() => {
+              setEditPost(p)
+              setIsOpen(true)
+            }}
+            className="focusable"
+          >
+            <DotsHorizontalIcon className="h-5" />
+          </button>
+        )}
       </header>
 
       {/* Image */}
@@ -145,10 +147,10 @@ export default function Post({ post: p }: { post: Post }) {
           />
           <Transition
             show={isShowing}
-            enter="transition-transform duration-80 ease-out"
+            enter="duration-80 ease-out"
             enterFrom="scale-0"
             enterTo="scale-90"
-            leave="transition-transform duration-80 ease-in"
+            leave="duration-80 ease-in"
             leaveFrom="scale-100"
             leaveTo="scale-0"
             className="absolute inset-0 grid place-items-center"

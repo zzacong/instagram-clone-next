@@ -6,7 +6,7 @@ export default function Story({ profile: p }: { profile: Profile }) {
   return (
     <li>
       <button className="focusable">
-        <div className="transform cursor-pointer rounded-full border-2 border-red-500 p-[1.5px] transition duration-200 ease-out hover:scale-110">
+        <div className="cursor-pointer rounded-full border-2 border-red-500 p-[1.5px] transition duration-200 ease-out hover:scale-110">
           <div className="relative h-14 w-14">
             <Image
               src={p.avatar!}

@@ -4,11 +4,11 @@
 
 @layer components {
   .nav-btn {
-    @apply flex h-6 w-6 cursor-pointer transition-all duration-150 ease-out hover:scale-105;
+    @apply flex h-6 w-6 cursor-pointer transition duration-150 ease-out hover:scale-105;
   }
 
   .btn {
-    @apply h-7 w-7 cursor-pointer transition-all duration-150 ease-out hover:scale-125;
+    @apply h-7 w-7 cursor-pointer transition duration-150 ease-out hover:scale-125;
   }
 
   .focusable {
