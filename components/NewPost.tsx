@@ -39,7 +39,7 @@ export default function NewPost() {
       })
       // upload the image to firebase storage with the post id
       const imageRef = ref(storage, `posts/${docRef.id}.${ext}`)
-      const res = await uploadString(imageRef, file, 'data_url')
+      await uploadString(imageRef, file, 'data_url')
       // get download url of image and update the post document
       const downloadUrl = await getDownloadURL(imageRef)
       await updateDoc(docRef, {
@@ -70,7 +70,7 @@ export default function NewPost() {
 
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <div className="z-40 my-8 w-full max-w-md overflow-hidden rounded-lg bg-white p-4 shadow-xl transition-all sm:p-6">
+      <div className="relative mx-auto mt-[20vh] w-full max-w-md overflow-hidden rounded-lg bg-white p-4 shadow-xl sm:p-6">
         <div>
           {file ? (
             <div className="relative h-44 cursor-pointer text-center">
@@ -83,13 +83,15 @@ export default function NewPost() {
               />
             </div>
           ) : (
-            <div className="mx-auto grid aspect-square w-12 cursor-pointer place-items-center rounded-full bg-gradient-to-tr from-blue-500 to-purple-500">
+            <button
+              onClick={() => filePickerRef.current?.click()}
+              className="focusable mx-auto grid aspect-square w-12 cursor-pointer place-items-center rounded-full bg-gradient-to-tr from-blue-500 to-purple-500"
+            >
               <CameraIcon
                 className="aspect-square w-6 text-white"
                 aria-hidden="true"
-                onClick={() => filePickerRef.current?.click()}
               />
-            </div>
+            </button>
           )}
 
           <div>

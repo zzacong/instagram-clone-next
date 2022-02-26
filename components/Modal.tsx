@@ -7,33 +7,31 @@ export default function Modal({ isOpen, onClose, children }: Props) {
       <Dialog
         open={isOpen}
         onClose={onClose}
-        className="index-10 fixed inset-0 z-10 overflow-y-auto"
+        className="fixed inset-0 z-20 overflow-y-auto px-4"
       >
-        <div className="flex min-h-screen items-center justify-center px-4 pt-4 pb-20">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="fixed inset-0 bg-black/80 transition-opacity" />
-          </Transition.Child>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300 transition"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200 transition"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black/80" />
+        </Transition.Child>
 
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            enterTo="opacity-100 translate-y-0 sm:scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-            leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-          >
-            {children}
-          </Transition.Child>
-        </div>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-90"
+          enterTo="opacity-100 translate-y-0 sm:scale-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+          leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-90"
+        >
+          {children}
+        </Transition.Child>
       </Dialog>
     </Transition>
   )

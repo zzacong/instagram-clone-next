@@ -2,20 +2,20 @@ import type { Profile } from '$lib/types'
 
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
-import { faker } from '@faker-js/faker'
 
 import Story from '$components/Story'
+import { collection, getDocs } from 'firebase/firestore'
+import { db } from '$lib/config/firebase'
 
 export default function Stories() {
   const { data: session } = useSession()
   const [profiles, setProfiles] = useState<Profile[]>([])
 
   useEffect(() => {
-    const suggestions = [...Array(20)].map((_, i) => ({
-      id: i.toString(),
-      ...faker.helpers.contextualCard(),
-    }))
-    setProfiles(suggestions)
+    ;(async () => {
+      const snap = await getDocs(collection(db, 'stories'))
+      setProfiles(snap.docs.map(d => d.data() as Profile))
+    })()
   }, [])
 
   return (

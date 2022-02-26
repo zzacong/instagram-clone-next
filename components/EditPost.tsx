@@ -44,27 +44,31 @@ export default function EditPost() {
 
   return (
     <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <div className="z-40 my-8 flex w-full max-w-sm flex-col overflow-hidden rounded-lg bg-white shadow-xl transition-all">
-        <button
-          onClick={onDelete}
-          disabled={isLoading}
-          className="modal-btn rounded-t-lg border-none font-bold text-red-500"
-        >
-          {isOwner ? 'Delete' : 'Report'}
-        </button>
-        {!isOwner && (
-          <button className="modal-btn font-bold text-red-500">Unfollow</button>
-        )}
-        <button className="modal-btn">Go to post</button>
-        <button className="modal-btn">Share to...</button>
-        <button className="modal-btn">Copy Link</button>
-        <button className="modal-btn">Embed</button>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="modal-btn rounded-b-lg"
-        >
-          Cancel
-        </button>
+      <div className="grid min-h-screen place-items-center">
+        <div className="relative flex w-full max-w-sm flex-col overflow-hidden rounded-lg bg-white shadow-xl">
+          <button
+            onClick={onDelete}
+            disabled={isLoading}
+            className="modal-btn rounded-t-lg border-none font-bold text-red-500"
+          >
+            {isOwner ? 'Delete' : 'Report'}
+          </button>
+          {!isOwner && (
+            <button className="modal-btn font-bold text-red-500">
+              Unfollow
+            </button>
+          )}
+          <button className="modal-btn">Go to post</button>
+          <button className="modal-btn">Share to...</button>
+          <button className="modal-btn">Copy Link</button>
+          <button className="modal-btn">Embed</button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="modal-btn rounded-b-lg"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </Modal>
   )
