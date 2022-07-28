@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useCallback, useRef, useState } from 'react'
 import Image from 'next/image'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { useSession } from 'next-auth/react'
 import {
   addDoc,
@@ -18,7 +18,7 @@ import { db, storage } from '$lib/config/firebase'
 
 export default function NewPost() {
   const { data: session } = useSession()
-  const [isOpen, setIsOpen] = useRecoilState(newPostModalState)
+  const [isOpen, setIsOpen] = useAtom(newPostModalState)
 
   const filePickerRef = useRef<HTMLInputElement>(null)
   const captionRef = useRef<HTMLInputElement>(null)

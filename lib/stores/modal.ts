@@ -1,17 +1,8 @@
 import { Post } from '$lib/types'
-import { atom } from 'recoil'
+import { atom } from 'jotai'
 
-export const newPostModalState = atom({
-  key: 'newPostModalState',
-  default: false,
-})
+export const newPostModalState = atom(false)
 
-export const editPostModalState = atom({
-  key: 'editPostModalState',
-  default: false,
-})
+export const editPostModalState = atom(false)
 
-export const editPostState = atom<Post | undefined>({
-  key: 'editPostState',
-  default: undefined,
-})
+export const editPostState = atom<Post | undefined>(undefined)

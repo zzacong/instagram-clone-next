@@ -16,7 +16,7 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore'
-import { useSetRecoilState } from 'recoil'
+import { useSetAtom } from 'jotai'
 import {
   BookmarkIcon,
   ChatIcon,
@@ -35,8 +35,8 @@ import { editPostModalState, editPostState } from '$lib/stores'
 export default function Post({ post: p }: { post: Post }) {
   const { data: session } = useSession()
   const { handleSubmit, register, watch, formState, reset } = useForm()
-  const setEditPost = useSetRecoilState(editPostState)
-  const setIsOpen = useSetRecoilState(editPostModalState)
+  const setEditPost = useSetAtom(editPostState)
+  const setIsOpen = useSetAtom(editPostModalState)
 
   const [comments, setComments] = useState<Comment[]>([])
   const [likes, setLikes] = useState<Like[]>([])

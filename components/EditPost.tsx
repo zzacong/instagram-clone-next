@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useAtom } from 'jotai'
 import { useSession } from 'next-auth/react'
 import { deleteDoc, doc } from 'firebase/firestore'
 import { deleteObject, ref } from 'firebase/storage'
@@ -10,8 +10,8 @@ import { db, storage } from '$lib/config/firebase'
 
 export default function EditPost() {
   const { data: session } = useSession()
-  const [isOpen, setIsOpen] = useRecoilState(editPostModalState)
-  const [post, setPost] = useRecoilState(editPostState)
+  const [isOpen, setIsOpen] = useAtom(editPostModalState)
+  const [post, setPost] = useAtom(editPostState)
   const [isLoading, setIsLoading] = useState(false)
 
   const isOwner = useMemo(

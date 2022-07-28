@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { useSetRecoilState } from 'recoil'
+import { useSetAtom } from 'jotai'
 import { HomeIcon as HomeIconFilled } from '@heroicons/react/solid'
 import {
   HeartIcon,
@@ -18,7 +18,7 @@ import { newPostModalState } from '$lib/stores'
 
 export default function Header() {
   const { data: session } = useSession()
-  const setIsOpen = useSetRecoilState(newPostModalState)
+  const setIsOpen = useSetAtom(newPostModalState)
 
   return (
     <header className="sticky top-0 z-10 border-b bg-white shadow-sm">
